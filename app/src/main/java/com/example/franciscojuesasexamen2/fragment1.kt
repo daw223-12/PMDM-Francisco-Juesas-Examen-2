@@ -40,8 +40,7 @@ class fragment1:Fragment() {
 
 
             textView.setOnClickListener( {
-                comunicador?.enviarDatos("¡Datos desde Fragmento 1!")
-                Log.d("HOLA", "HOPADSKLLKDASJLKDJALSKJDLKDASDLKASDKL")
+                comunicador?.enviarDatos("Datos desde Hijo"+i.toString())
             })
         }
 

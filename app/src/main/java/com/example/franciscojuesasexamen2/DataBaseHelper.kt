@@ -43,7 +43,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    fun getAllDiscos(): ArrayList<DataClassTarea> {
+    fun getAllTareas(): ArrayList<DataClassTarea> {
         // Lista para almacenar y retornar los discos.
         val tareasList = ArrayList<DataClassTarea>()
         // Consulta SQL para seleccionar todos los discos.
@@ -89,5 +89,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         // Cierra el cursor para liberar recursos.
         cursor.close()
         return tareasList
+    }
+
+    fun addTarea(tarea: DataClassTarea): Long {
+        try {
+            val db = this.writableDatabase
+            val contentValues = ContentValues()
+            // Prepara los valores a insertar.
+            contentValues.put(KEY_NOMBRE, tarea.nombre)
+            contentValues.put(KEY_FECHA, tarea.fecha)
+            contentValues.put(KEY_ESTADO, tarea.estado)
+
+            // Inserta la nueva tarea y retorna el ID del nuevo disco o -1 en caso de error.
+            val success = db.insert(TABLE_DISCOS, null, contentValues)
+            db.close()
+            return success
+        } catch (e: Exception) {
+            // Maneja la excepción en caso de error al insertar.
+            Log.e("Error", "Error al agregar disco", e)
+            return -1
+        }
     }
 }
