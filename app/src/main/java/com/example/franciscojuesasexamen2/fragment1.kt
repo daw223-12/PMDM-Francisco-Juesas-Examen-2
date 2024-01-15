@@ -37,6 +37,8 @@ class fragment1:Fragment() {
             textView.text = "Hijo "
             listViewTareas.addView(textView)
 
+
+
             textView.setOnClickListener( {
                 comunicador?.enviarDatos("¡Datos desde Fragmento 1!")
                 Log.d("HOLA", "HOPADSKLLKDASJLKDJALSKJDLKDASDLKASDKL")

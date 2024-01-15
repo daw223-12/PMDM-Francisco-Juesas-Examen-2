@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity(), Comunicador {
+    private lateinit var dbHandler: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Inicializa el controlador de la base de datos.
+        dbHandler = DatabaseHelper(this)
 
         if (savedInstanceState == null) {
             // Comienza una transacción de fragmentos. Las transacciones se utilizan para añadir, reemplazar o realizar otras operaciones con fragmentos.
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity(), Comunicador {
                 .replace(R.id.fragment2Layout, fragment2())
                 .commit()
         }
+        dbHandler.getAllDiscos();
     }
 
     override fun enviarDatos(datos: String) {
